@@ -66,6 +66,14 @@ const PostText = styled.Text`
   line-height: 24px;
 `;
 
+const truncateTitle = (str) => {
+  if (str.length >= 50) {
+    return str.substring(0, 50) + "...";
+  }
+
+  return str;
+};
+
 export const FullPost = ({ route, navigation }) => {
   const [dataPost, setData] = useState();
 
@@ -76,7 +84,7 @@ export const FullPost = ({ route, navigation }) => {
       title,
     });
     axios
-      .get(`https://64865e31a795d24810b7e00b.mockapi.io/items/2`)
+      .get(`https://64865e31a795d24810b7e00b.mockapi.io/items/1`)
       .then(({ dataPost }) => {
         setData(dataPost);
       })
@@ -91,8 +99,8 @@ export const FullPost = ({ route, navigation }) => {
 
   return (
     <View>
-      <PostImage source={{ uri: dataPost.imageUrl }} />
-      {/* <PostText>{}</PostText> */}
+      {/* <PostImage source={{ uri: dataPost.imageUrl }} /> */}
+      <PostText>{truncateTitle(dataPost.text)}</PostText>
     </View>
   );
 };
